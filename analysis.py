@@ -6,6 +6,7 @@ def calculate_year_over_year_change(utah_df):
 
     analyzed_df = utah_df.copy()
 
+    # Compare each monthly value with the same month one year earlier.
     analyzed_df["YoYPercentChange"] = (
         analyzed_df["HomeValue"]
         .pct_change(periods=12)
