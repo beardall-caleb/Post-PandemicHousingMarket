@@ -1,6 +1,7 @@
 # Post-PandemicHousingMarket
 
 Like many people in their twenties and thirties who live in Utah, I am a renter. This is frustrating because I would prefer for my monthly housing payments to help me build equity in a home rather than leave my wallet, never to be seen again.
+
 Utah’s housing market is frequently on my mind, and I find myself asking the same questions every year: Will this be the year the housing market corrects itself? Should I purchase a home even if the monthly payment would consume most of my paycheck so that I can enter the market and benefit from future appreciation? Or would it be better to continue saving as much as possible so that I am prepared to purchase a home if prices fall?
 
 Everyone seems to have a strong opinion about the housing market, but no one can know with certainty when the ideal time to buy will be.
