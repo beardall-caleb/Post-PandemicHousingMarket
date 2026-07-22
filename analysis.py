@@ -71,3 +71,71 @@ def compare_growth_periods(
     ]
 
     return (highest_pre_pandemic, highest_post_pandemic)
+
+
+def get_recent_growth_data(
+    utah_analysis_df,
+    months=36
+):
+    """Return Utah's most recent months of valid YoY data."""
+
+    valid_rows = utah_analysis_df.dropna(
+        subset=["YoYPercentChange"]
+    )
+
+    recent_growth_df = (
+        valid_rows
+        .sort_values("Date")
+        .tail(months)
+        .copy()
+    )
+
+    return recent_growth_df
+
+
+def compare_recent_growth_rates(recent_growth_df):
+    """Return current and earlier YoY growth data."""
+
+    # Comparing the latest month with the same month two years
+    # earlier requires at least 25 months.
+    if len(recent_growth_df) < 25:
+        raise ValueError(
+            "At least 25 months are required "
+            "for a two-year comparision."
+        )
+    
+    # Select the latest available month, the same month one year
+    # earlier, and the same month two years earlier.
+    current_row = recent_growth_df.iloc[-1]
+    one_year_ago_row = recent_growth_df.iloc[-13]
+    two_years_ago_row = recent_growth_df.iloc[-25]
+
+    return (
+        current_row,
+        one_year_ago_row,
+        two_years_ago_row
+    )
+
+
+def calculate_recent_yearly_averages(
+        recent_growth_df
+):
+    """Calculate the average YoY growth rate by year."""
+
+    yearly_data = recent_growth_df.copy()
+
+    # Add a Year column using the Date column.
+    yearly_data["Year"] = (
+        yearly_data["Date"].dt.year
+    )
+
+    # Group months by calendar year and calculate
+    # the average YoY growth rate for each year.
+    yearly_averages = (
+        yearly_data
+        .groupby("Year")["YoYPercentChange"]
+        .mean()
+        .round(2)
+    )
+
+    return yearly_averages
