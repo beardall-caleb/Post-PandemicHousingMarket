@@ -77,3 +77,27 @@ def create_utah_dataframe(housing_df):
     )
 
     return utah_df
+
+
+def create_utah_and_state_average_dataframe(housing_df):
+    """
+    Create a DataFrame containing Utah home values and the
+    average of the state and territory values.
+    """
+
+    state_columns = housing_df.columns.drop("Date")
+
+    comparison_df = housing_df[["Date", "Utah"]].copy()
+
+    # Add the StateAverage column by calculating the mean
+    # across the values in each row.
+    comparison_df["StateAverage"] = (
+        housing_df[state_columns]
+        .mean(axis=1, skipna=True)
+    )
+
+    comparison_df = comparison_df.rename(
+        columns={"Utah": "UtahHomeValue"}
+    )
+
+    return comparison_df

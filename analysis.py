@@ -101,7 +101,7 @@ def compare_recent_growth_rates(recent_growth_df):
     if len(recent_growth_df) < 25:
         raise ValueError(
             "At least 25 months are required "
-            "for a two-year comparision."
+            "for a two-year comparison."
         )
     
     # Select the latest available month, the same month one year
@@ -118,7 +118,7 @@ def compare_recent_growth_rates(recent_growth_df):
 
 
 def calculate_recent_yearly_averages(
-        recent_growth_df
+    recent_growth_df
 ):
     """Calculate the average YoY growth rate by year."""
 
@@ -139,3 +139,88 @@ def calculate_recent_yearly_averages(
     )
 
     return yearly_averages
+
+
+def calculate_comparison_growth_rates(comparison_df):
+    """
+    Calculate year-over-year percentage change for Utah
+    and the state average.
+    """
+
+    analyzed_df = comparison_df.copy()
+
+    # Add the UtahYoYPercentChange column containing
+    # Utah's year-over-year growth rates.
+    analyzed_df["UtahYoYPercentChange"] = (
+        analyzed_df["UtahHomeValue"]
+        .pct_change(periods=12)
+        .mul(100)
+    )
+
+    # Add the StateAverageYoYPercentChange column containing
+    # the state-average year-over-year growth rates.
+    analyzed_df["StateAverageYoYPercentChange"] = (
+        analyzed_df["StateAverage"]
+        .pct_change(periods=12)
+        .mul(100)
+    )
+
+    return analyzed_df
+
+
+def get_post_pandemic_comparison(
+    comparison_analysis_df,
+    pandemic_start="2020-03-01"
+):
+    """Return Utah and state-average data from March 2020 onward."""
+
+    pandemic_start = pd.Timestamp(pandemic_start)
+
+    # Create a DataFrame containing rows dated
+    # March 2020 or later.
+    post_pandemic_df = comparison_analysis_df[
+        comparison_analysis_df["Date"] >= pandemic_start
+    ].copy()
+
+    return post_pandemic_df
+
+
+def calculate_cumulative_growth(post_pandemic_df):
+    """
+    Calculate cumulative percentage growth from the first
+    month in the post-pandemic comparison period.
+    """
+
+    cumulative_df = post_pandemic_df.copy()
+
+    # Use the first Utah home value in the selected period
+    # as the baseline.
+    utah_baseline = cumulative_df[
+        "UtahHomeValue"
+    ].iloc[0]
+
+    # Use the first state-average value in the selected period
+    # as the baseline.
+    state_average_baseline = cumulative_df[
+        "StateAverage"
+    ].iloc[0]
+
+    # Cumulative percentage-change formula:
+    # (current value / baseline value - 1) * 100
+    cumulative_df["UtahCumulativePercentChange"] = (
+        (
+            cumulative_df["UtahHomeValue"]
+            / utah_baseline
+        ) - 1
+    ) * 100
+
+    cumulative_df[
+        "StateAverageCumulativePercentChange"
+    ] = (
+        (
+            cumulative_df["StateAverage"]
+            / state_average_baseline
+        ) - 1
+    ) * 100
+
+    return cumulative_df

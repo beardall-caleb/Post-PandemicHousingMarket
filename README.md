@@ -25,14 +25,14 @@ The dataset is mostly complete, although several states are missing one or more 
 - Question 1: How does Utah’s post-pandemic rate of change compare with previous years? Specifically, have Utah home values increased faster than at any other point since 2000?
   - Answer: Utah’s largest year-over-year increase in home values occurred in August 2021, following the initial COVID-19 outbreak in March 2020. In August 2021, Utah home values were 27.96% higher than they had been in August 2020.
 
-  This rate was 10.62 percentage points higher than Utah’s largest pre-pandemic year-over-year increase, which occurred in May 2007. Therefore, according to this dataset, Utah home values increased faster during the post-pandemic period than at any earlier point since 2000.
+    This rate was 10.62 percentage points higher than Utah’s largest pre-pandemic year-over-year increase, which occurred in May 2007. Therefore, according to this dataset, Utah home values increased faster during the post-pandemic period than at any earlier point since 2000.
 
 - Question 2: Over the past two to three years, has Utah’s rate of change in home values accelerated, slowed, or remained relatively consistent?
   - Answer: Utah’s average monthly year-over-year rate of change was -3.96% in 2023, meaning that homes values were generally lower than they had been during the same months in 2022.
 
-  Home values began increasing year over year again 2024. The average year-over-year growth rate was 1.48% in 2024, followed by 1.94% in 2025, and 1.80% during the available months of 2026.
+    Home values began increasing year over year again 2024. The average year-over-year growth rate was 1.48% in 2024, followed by 1.94% in 2025, and 1.80% during the available months of 2026.
 
-  Across those three years, the average year-over-year growth rate was approximately 1.74%. Because the annual averages remained within a relatively narrow range, I would conclude that Utah’s rate of home-value growth has remained relatively consistent since it became positive again in 2024.
+    Across those three years, the average year-over-year growth rate was approximately 1.74%. Because the annual averages remained within a relatively narrow range, I would conclude that Utah’s rate of home-value growth has remained relatively consistent since it became positive again in 2024.
 
 # Development Environment
 

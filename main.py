@@ -1,7 +1,8 @@
 from data_cleaning import (
     load_and_clean_data,
     check_cleaned_dataset,
-    create_utah_dataframe
+    create_utah_dataframe,
+    create_utah_and_state_average_dataframe
 )
 
 from analysis import (
@@ -10,8 +11,12 @@ from analysis import (
     compare_growth_periods,
     get_recent_growth_data,
     compare_recent_growth_rates,
-    calculate_recent_yearly_averages
+    calculate_recent_yearly_averages,
+    calculate_comparison_growth_rates,
+    get_post_pandemic_comparison,
+    calculate_cumulative_growth
 )
+
 
 def main():
     file_path = "data/ZHVI.csv"
@@ -77,6 +82,51 @@ def main():
     
     print("\nAverage YoY growth rate by year:")
     print(yearly_averages)
+
+    comparison_df = (
+        create_utah_and_state_average_dataframe(housing_df)
+    )
+
+    comparison_analysis_df = (
+        calculate_comparison_growth_rates(comparison_df)
+    )
+
+    post_pandemic_comparison_df = (
+        get_post_pandemic_comparison(comparison_analysis_df)
+    )
+
+    cumulative_comparison_df = (
+        calculate_cumulative_growth(post_pandemic_comparison_df)
+    )
+
+    initial_comparison = cumulative_comparison_df.iloc[0]
+    latest_comparison = cumulative_comparison_df.iloc[-1]
+
+    print("\nPost-pandemic cumulative comparison:")
+
+    print(f"\nInitial values ({initial_comparison['Date']:%B %Y}):")
+    print(f"Utah home value: ${initial_comparison['UtahHomeValue']:,.2f}")
+    print(f"Average state home value: ${initial_comparison['StateAverage']:,.2f}")
+
+    print(f"\nCurrent values ({latest_comparison['Date']:%B %Y}):")
+    print(f"Utah home value: ${latest_comparison['UtahHomeValue']:,.2f}")
+    print(f"Average state home value: ${latest_comparison['StateAverage']:,.2f}")
+
+    print("\nCumulative change:")
+    print(f"Utah: {latest_comparison['UtahCumulativePercentChange']:.2f}%")
+    print(
+        f"Average state value: "
+        f"{latest_comparison['StateAverageCumulativePercentChange']:.2f}%"
+    )
+
+    difference = (
+        latest_comparison["UtahCumulativePercentChange"]
+        - latest_comparison[
+            "StateAverageCumulativePercentChange"
+        ]
+    )
+
+    print(f"Difference: {difference:.2f} percentage points")
 
 
 if __name__ == "__main__":
