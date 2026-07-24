@@ -34,11 +34,16 @@ The dataset is mostly complete, although several states are missing one or more 
 
     Across those three years, the average year-over-year growth rate was approximately 1.74%. Because the annual averages remained within a relatively narrow range, I would conclude that Utah’s rate of home-value growth has remained relatively consistent since it became positive again in 2024.
 
+- Question 3: How does Utah’s rate of change in home values since the COVID-19 pandemic compare with the national rate of change?
+  - Answer: Since the COVID-19 outbreak in March 2020, the estimated value of a typical Utah home has increased from $361,361.27 to an astonishing $541,227.04 as of May 2026. This represents a cumulative increase of 49.79%. In other words, Utah’s typical home value is now approximately one and a half times what it was in March 2020.
+
+    The national average also increased during this period, rising from $271,261.78 to $388,709.90. This represents a cumulative increase of 43.30%.
+
+    Thus, according to this dataset, Utah’s home values have increased 6.49 percentage points more than the national average. Although I believe that this difference has meaningfully affected first-time homebuyers’ ability to enter Utah’s housing market, I was somewhat surprised that the gap was not larger.
+
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+This application was created using the Python programming language and the pandas library.
 
 # Useful Websites
 
@@ -48,8 +53,5 @@ The dataset is mostly complete, although several states are missing one or more 
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Create visual representations of the data used to reach my conclusions. Plots, charts, and graphs are often easier to digest rather than raw data and may reveal trends that individual data points cannot show clearly.
+- Strengthen the comparison between Utah and the United States by incorporating an official national ZHVI series or another appropriately weighted national housing dataset. This would provide a more accurate national benchmark than the unweighted average currently being used.
